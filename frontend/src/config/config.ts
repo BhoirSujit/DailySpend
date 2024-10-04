@@ -1,0 +1,1 @@
+export const backendaddress = import.meta.env.VITE_BACKEND_ADDRESS
