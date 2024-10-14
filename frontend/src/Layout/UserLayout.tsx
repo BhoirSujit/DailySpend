@@ -1,17 +1,26 @@
-import React, { Children } from 'react'
+import React, { Children} from 'react'
+import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Main from './Main'
+import { useLocation } from 'react-router-dom'
+import routeMap from '../utils/routeMap'
 
-const UserLayout = ({children, title}) => {
+const UserLayout = () => {
+
+  const location = useLocation();
+
+  
+  
+
   return (
     <div>
       <Header/>
       <div className="grid grid-cols-1-fr">
       <Sidebar/>
-      <Main title={title}>
+      <Main title={routeMap[location.pathname]}>
         <div className='mt-4'>
-          {children}
+          <Outlet/>
         </div>
         
       </Main>

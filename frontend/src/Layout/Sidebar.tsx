@@ -115,7 +115,7 @@ const Sidebar = ({activeNav}) => {
         <li>
           <Link
             className="flex gap-2 hover:bg-slate-100 p-2 rounded-md"
-            to={"/dashbord"}
+            to={"/profile"}
           >
             <AdjustmentsVerticalIcon className=" size-6" />
             <span className="flex-grow">Profile</span>

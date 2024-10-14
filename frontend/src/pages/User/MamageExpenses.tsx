@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ManageExpenses = () => {
   return (
     <div>
-      <UserLayout title={"Manage Expenses"}>
+     
         <div className="border p-2">
           <table className="w-full border-collapse  p-2">
             <thead className="bg-indigo-400 text-white">
@@ -18,7 +18,7 @@ const ManageExpenses = () => {
             </thead>
           </table>
         </div>
-      </UserLayout>
+    
     </div>
   );
 };

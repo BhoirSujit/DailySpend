@@ -1,18 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Logo from "../../components/Logo";
 import { Link } from "react-router-dom";
+import { loginUser } from "../../api/AuthApi";
+
+import AuthContext from "../../context/AuthContext";
 
 const Login = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [pass, setPass] = useState();
-  const [confpass, setConfPass] = useState();
+  const initVal = {email : '', pass : ''};
+  const {auth, setAuth} = useContext(AuthContext)
+  const [formData, setFormData] = useState(initVal);
+  console.log(auth)
+  const handleChanges = (e) => {
+    const {name, value} = e.target;
+    setFormData({...formData, [name]:value})
+  }
+
+  const  handleSubmit = async (e) => {
+    
+    e.preventDefault();
+    e.stopPropagation();
+
+
+    //login
+    const d = await loginUser({email: formData.email, password: formData.pass});
+    console.log(d);
+    setAuth({token : d.token});
+  }
  
 
   return (
     <div>
       <div className="card mx-72 place-content-center h-[100vh]  ">
-        <form className=" flex flex-col justify-center  gap-3" action="">
+        <form onSubmit={handleSubmit} className=" flex flex-col justify-center  gap-3" action="">
           <div className="text-center">
             <Logo />
           </div>
@@ -29,6 +48,7 @@ const Login = () => {
               id="email"
               type="email"
               placeholder="emaple@gmail.com"
+              onChange={handleChanges}
             />
           </div>
           <div className="form-control flex flex-col ">
@@ -41,13 +61,14 @@ const Login = () => {
 
             <input
               className="border rounded-md p-1 mt-1  focus:outline-indigo-100"
-              name="password"
+              name="pass"
               id="password"
               type="password"
               placeholder="*********"
+              onChange={handleChanges}
             />
           </div>
-          <button className="w-full  bg-indigo-600 px-4 py-1 rounded-md text-white">
+          <button type="submit" className="w-full  bg-indigo-600 px-4 py-1 rounded-md text-white">
             Login
           </button>
 

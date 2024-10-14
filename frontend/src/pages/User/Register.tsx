@@ -1,43 +1,36 @@
-import React, { useRef } from "react";
+import React, { FormEvent, useRef } from "react";
 import Logo from "../../components/Logo";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { VconfirmPassword, Vname, Vpassword } from "../../utils/validate";
+import { validateRegisterForm } from "../../utils/validate";
 import { registerUser } from "../../api/AuthApi";
 
 const Register = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [pass, setPass] = useState<string>("");
-  const [confpass, setConfPass] = useState<string>("");
-  const confpassRef = useRef();
+  const initvalue = { name: "", email: "", pass: "", confpass: "" };
+  const [formData, setFormData] = useState(initvalue);
+  const [formError, setFormErr] = useState(initvalue);
+
+  const handleChanges = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    console.log(formData);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     //validate
-
-    if (!Vname(name)) {
-      return "envalid name";
-    }
-
-    if (!Vpassword(pass)) {
-      return "password validate";
-    }
-
-    if (!VconfirmPassword(pass, confpass)) {
-      confpassRef.current?.setCustomValidity("password doesnt match");
-      return;
+    let vali = validateRegisterForm(formData);
+    if (Object.keys(vali).length > 0) {
+      setFormErr(vali);
     } else {
-      confpassRef.current?.setCustomValidity("");
+      registerUser({
+        name: formData.name,
+        email: formData.email,
+        password: formData.pass,
+      });
     }
-
-    registerUser({
-      name: name,
-      email: email,
-      password: pass,
-    });
   };
 
   return (
@@ -63,8 +56,9 @@ const Register = () => {
               type="text"
               placeholder="your name"
               required
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleChanges}
             />
+            <p className="text-red-600">{formError.name}</p>
           </div>
 
           <div className="form-control flex flex-col">
@@ -76,23 +70,25 @@ const Register = () => {
               type="email"
               required
               placeholder="emaple@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChanges}
             />
+            <p className="text-red-600">{formError.email}</p>
           </div>
           <div className="form-control flex flex-col ">
             <div className="flex justify-between">
-              <label htmlFor="password">Password</label>{" "}
+              <label htmlFor="password">Password</label>
             </div>
 
             <input
               className="border rounded-md p-1 px-2 mt-1  focus:outline-indigo-100"
-              name="password"
+              name="pass"
               id="password"
               type="password"
               required
               placeholder="*********"
-              onChange={(e) => setPass(e.target.value)}
+              onChange={handleChanges}
             />
+            <p className="text-red-600">{formError.pass}</p>
           </div>
           <div className="form-control flex flex-col ">
             <div className="flex justify-between">
@@ -100,15 +96,15 @@ const Register = () => {
             </div>
 
             <input
-              ref={confpassRef}
               className="border rounded-md p-1 px-2 mt-1  focus:outline-indigo-100"
-              name="confirm-password"
+              name="confpass"
               id="confirm-password"
               type="password"
               required
               placeholder="*********"
-              onChange={(e) => setConfPass(e.target.value)}
+              onChange={handleChanges}
             />
+            <p className="text-red-600">{formError.confpass}</p>
           </div>
           <button
             type="submit"

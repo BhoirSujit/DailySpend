@@ -1,13 +1,15 @@
-import React from 'react'
-import UserLayout from '../../Layout/UserLayout'
-import { Link } from 'react-router-dom'
+import React from "react";
+import UserLayout from "../../Layout/UserLayout";
+import { Link } from "react-router-dom";
 
 const AddExpenses = () => {
   return (
     <div>
-      <UserLayout title={'Add Expenses'}>
-<div>
-<form className=" flex flex-col justify-center border p-4   gap-3" action="">
+      <div>
+        <form
+          className=" flex flex-col justify-center border p-4   gap-3"
+          action=""
+        >
           <div className="form-control flex flex-col">
             <label htmlFor="date">Date</label>
             <input
@@ -21,7 +23,6 @@ const AddExpenses = () => {
           <div className="form-control flex flex-col ">
             <div className="flex justify-between">
               <label htmlFor="item">Name of item</label>{" "}
-              
             </div>
 
             <input
@@ -35,7 +36,6 @@ const AddExpenses = () => {
           <div className="form-control flex flex-col ">
             <div className="flex justify-between">
               <label htmlFor="cost">Cost of item</label>{" "}
-              
             </div>
 
             <input
@@ -49,7 +49,6 @@ const AddExpenses = () => {
           <div className="form-control flex flex-col ">
             <div className="flex justify-between">
               <label htmlFor="category">Category</label>{" "}
-              
             </div>
 
             <select
@@ -57,19 +56,16 @@ const AddExpenses = () => {
               name="category"
               id="category"
             >
-                <option selected>Other</option>
+              <option selected>Other</option>
             </select>
           </div>
           <button className="w-full  bg-indigo-500 px-4 py-2 rounded-md mt-2 text-white">
-            Add 
+            Add
           </button>
-
-          
         </form>
-</div>
-      </UserLayout>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddExpenses
+export default AddExpenses;
