@@ -8,6 +8,7 @@ const expensesShema = new Schema(
     },
     userId: {
       type: Schema.Types.ObjectId,
+      required: true,
     },
     amount: {
       type: Number,

@@ -2,6 +2,7 @@ import { NextFunction, Request, RequestHandler, Response } from "express";
 import createHttpError from "http-errors";
 import expensesModel, { Expenses } from "../model/expenses";
 import { isValidObjectId } from "mongoose";
+import { JwtPayload } from "jsonwebtoken";
 
 interface ExpensesBody {
   item: string;
@@ -11,7 +12,10 @@ interface ExpensesBody {
 
 export const getExpenses: RequestHandler = async (req, res, next) => {
   try {
-    const expenses = await expensesModel.find();
+    //@ts-ignore
+    const userId = req.user.userId;
+
+    const expenses = await expensesModel.find({ userId: userId });
 
     res.status(200).json(expenses);
   } catch (error) {
@@ -32,9 +36,16 @@ export const getExpense: RequestHandler<
 > = async (req, res, next) => {
   const expenseId = req.params.expenseId;
   try {
+    //@ts-ignore
+    const userId = req.user.userId;
+
     if (!isValidObjectId(expenseId)) throw createHttpError(400, "Invalid id");
 
     const expenses = await expensesModel.findById(expenseId);
+
+    //check if user own this expense or not
+    if (expenses?.userId != userId)
+      throw createHttpError(404, "Expense Record not Found");
 
     if (!expenses) throw createHttpError(404, "Expense Record not Found");
 
@@ -50,6 +61,8 @@ export const addExpenses: RequestHandler<any, any, ExpensesBody, any> = async (
   next: NextFunction
 ) => {
   const { item, amount, category } = req.body;
+  //@ts-ignore
+  const userId = req.user.userId;
 
   try {
     //400 = bad request
@@ -58,6 +71,7 @@ export const addExpenses: RequestHandler<any, any, ExpensesBody, any> = async (
     if (!category) throw createHttpError(400, "body must contain category");
 
     const newExpenses = new expensesModel({
+      userId: userId,
       item: item,
       amount: amount,
       category: category,
@@ -120,11 +134,19 @@ export const deleteExpense: RequestHandler<
 > = async (req, res, next) => {
   const expenseId = req.params.expenseId;
   try {
+
+     //@ts-ignore
+     const userId = req.user.userId;
+
     if (!isValidObjectId(expenseId)) throw createHttpError(400, "Invlaid Id");
 
     const expense = await expensesModel.findById(expenseId);
 
     if (!expense) throw createHttpError(404, "Expense Record not Found");
+
+    //check if user own this expense or not
+    if (expense?.userId != userId)
+      throw createHttpError(404, "Expense Record not Found");
 
     await expense.deleteOne();
 

@@ -1,16 +1,13 @@
 import { Router } from "express";
 
-import * as Expenses from "../controller/expenses"
+import * as ExpensesController from "../controller/expenses";
 
 const router = Router();
 
-//add expenses 
-
-router.get("/", Expenses.getExpenses);
-router.get("/:expenseId", Expenses.getExpense);
-router.post("/",  Expenses.addExpenses);
-router.put("/:expenseId", Expenses.updateExpenses);
-router.delete("/:expenseId", Expenses.deleteExpense);
-
+router.get("/", ExpensesController.getExpenses);
+router.get("/:expenseId", ExpensesController.getExpense);
+router.post("/", ExpensesController.addExpenses);
+router.put("/:expenseId", ExpensesController.updateExpenses);
+router.delete("/:expenseId", ExpensesController.deleteExpense);
 
 export default router;
