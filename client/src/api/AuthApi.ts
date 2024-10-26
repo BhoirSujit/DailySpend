@@ -30,3 +30,14 @@ export const loginUser = async (data: usersData) => {
   return d.data;
 
 }
+
+export const verifyUser = async (token: string) => {
+  axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token')!;
+
+  const d = await axios.post(backendaddress+"/api/user/verify", token)
+  .catch(e => {
+    console.log(e);
+  })
+
+  return d.data;
+}
