@@ -1,7 +1,3 @@
-import React from "react";
-import UserLayout from "../../Layout/UserLayout";
-import { Link } from "react-router-dom";
-
 const AddExpenses = () => {
   return (
     <div>

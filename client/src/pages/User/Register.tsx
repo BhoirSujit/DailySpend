@@ -1,36 +1,9 @@
-import React, { FormEvent, useRef } from "react";
 import Logo from "../../components/Logo";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { validateRegisterForm } from "../../utils/validate";
-import { registerUser } from "../../api/AuthApi";
 
 const Register = () => {
-  const initvalue = { name: "", email: "", pass: "", confpass: "" };
-  const [formData, setFormData] = useState(initvalue);
-  const [formError, setFormErr] = useState(initvalue);
-
-  const handleChanges = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    console.log(formData);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    e.stopPropagation();
-
-    //validate
-    let vali = validateRegisterForm(formData);
-    if (Object.keys(vali).length > 0) {
-      setFormErr(vali);
-    } else {
-      registerUser({
-        name: formData.name,
-        email: formData.email,
-        password: formData.pass,
-      });
-    }
   };
 
   return (
@@ -81,14 +54,14 @@ const Register = () => {
 
             <input
               className="border rounded-md p-1 px-2 mt-1  focus:outline-indigo-100"
-              name="pass"
+              name="password"
               id="password"
               type="password"
               required
               placeholder="*********"
               onChange={handleChanges}
             />
-            <p className="text-red-600">{formError.pass}</p>
+            <p className="text-red-600">{formError.password}</p>
           </div>
           <div className="form-control flex flex-col ">
             <div className="flex justify-between">
@@ -97,14 +70,14 @@ const Register = () => {
 
             <input
               className="border rounded-md p-1 px-2 mt-1  focus:outline-indigo-100"
-              name="confpass"
+              name="conformpassword"
               id="confirm-password"
               type="password"
               required
               placeholder="*********"
               onChange={handleChanges}
             />
-            <p className="text-red-600">{formError.confpass}</p>
+            <p className="text-red-600">{formError.conformpassword}</p>
           </div>
           <button
             type="submit"

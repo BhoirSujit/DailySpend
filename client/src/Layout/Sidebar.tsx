@@ -10,10 +10,12 @@ import {
 } from "@heroicons/react/24/solid";
 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import useAuth from "../hooks/useAuth";
 
 const Sidebar = ({activeNav}) => {
   const expenseExpand = useRef();
   const reportExpand = useRef();
+  const {logout} = useAuth();
 
   const handleExpenseExpand = (e) => {
     expenseExpand.current?.classList.toggle("hidden");
@@ -122,13 +124,13 @@ const Sidebar = ({activeNav}) => {
           </Link>
         </li>
         <li>
-          <Link
+          <button
             className="flex gap-2 hover:bg-slate-100 p-2 rounded-md"
-            to={""}
+           onClick={logout}
           >
             <ArrowRightStartOnRectangleIcon className="size-6" />
             <span className="flex-grow"> Logout</span>
-          </Link>
+          </button>
         </li>
       </ul>
     </nav>

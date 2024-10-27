@@ -4,8 +4,11 @@ import UsersRouter from "./routes/users";
 import morgan from "morgan";
 import { isHttpError } from "http-errors";
 import authenticateToken from "./middleware/auth";
+import cors from 'cors'
 
 const app = express();
+
+app.use(cors())
 
 app.use(morgan("dev"));
 
