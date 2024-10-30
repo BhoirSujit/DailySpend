@@ -1,8 +1,10 @@
 import { useContext } from "react";
-import AuthContext from "../context/auth";
+import AuthContext, { AuthContextType } from "../context/auth";
 
-const useAuth = () => {
-  return useContext(AuthContext);
+const useAuth = () : AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) throw Error("Faild to provide context")
+  return context
 };
 
 export default useAuth;

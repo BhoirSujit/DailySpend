@@ -1,9 +1,47 @@
 import Logo from "../../components/Logo";
-import { Link } from "react-router-dom";
+import {useState} from "react"
+import { Link, useNavigate } from "react-router-dom";
+import { signup } from "../../api/auth.api";
+import useAuth from "../../hooks/useAuth";
+
+interface RegistrationDataBody  {
+  name: string,
+  email: string,
+  password: string,
+  confirm_password? : string,
+}
 
 const Register = () => {
-  const handleSubmit = async (e) => {
+  const {setToken} = useAuth();
+  const navigate = useNavigate();
+
+  const [data, setData] = useState<RegistrationDataBody>({
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  });
+  const [formError, setFormError] = useState<RegistrationDataBody>({
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    try {
+      const res = await signup(data!);
+      if (res && res.token) {
+        setToken(res.token)
+        navigate("/dashbord")
+      }
+    } catch (error) {
+      alert(error);
+    }
+
+
   };
 
   return (
@@ -29,7 +67,7 @@ const Register = () => {
               type="text"
               placeholder="your name"
               required
-              onChange={handleChanges}
+              onChange={(e) => setData({ ...data, name: e.target.value })}
             />
             <p className="text-red-600">{formError.name}</p>
           </div>
@@ -43,7 +81,7 @@ const Register = () => {
               type="email"
               required
               placeholder="emaple@gmail.com"
-              onChange={handleChanges}
+              onChange={(e) => setData({...data, email: e.target.value})}
             />
             <p className="text-red-600">{formError.email}</p>
           </div>
@@ -59,7 +97,7 @@ const Register = () => {
               type="password"
               required
               placeholder="*********"
-              onChange={handleChanges}
+              onChange={(e) => setData({...data, password : e.target.value})}
             />
             <p className="text-red-600">{formError.password}</p>
           </div>
@@ -75,9 +113,9 @@ const Register = () => {
               type="password"
               required
               placeholder="*********"
-              onChange={handleChanges}
+              onChange={(e) => setData({...data, password_password : e.target.value})}
             />
-            <p className="text-red-600">{formError.conformpassword}</p>
+            <p className="text-red-600">{formError.conform_password}</p>
           </div>
           <button
             type="submit"

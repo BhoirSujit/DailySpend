@@ -1,7 +1,6 @@
 import axios from "axios";
 import { backendaddress } from "../config/config";
-import { setToken } from "../service/auth";
-import { deleteToken} from "../service/auth";
+import { deleteToken } from "../service/auth";
 
 interface LoginData {
   email: string;
@@ -19,7 +18,7 @@ export const login = async ({ email, password }: LoginData) => {
     email,
     password,
   });
-  setToken(response.data.token);
+
   return response.data;
 };
 
@@ -29,7 +28,7 @@ export const signup = async ({ name, email, password }: SignUpData) => {
     email,
     password,
   });
-  setToken(response.data.token);
+
   return response.data;
 };
 

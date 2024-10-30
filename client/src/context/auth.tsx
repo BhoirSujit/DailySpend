@@ -1,11 +1,11 @@
 import { createContext } from "react";
 
-interface ContextData {
+export interface AuthContextType {
     token : string,
     setToken : (newToken : string) => void,
     logout: () => void,
 }
 
-const AuthContext = createContext<ContextData>(null);
+const AuthContext = createContext<AuthContextType| undefined>(undefined);
 
 export default AuthContext

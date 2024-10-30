@@ -1,19 +1,40 @@
+import {SubmitHandler, useForm} from "react-hook-form"
+import { addExpenses } from "../../api/expense.api";
+
+interface IAddExpenseData {
+  date: string,
+  item : string,
+  amount: number,
+  category: string,
+}
+
 const AddExpenses = () => {
+  const {handleSubmit, register, formState: {errors}} = useForm<IAddExpenseData>()
+
+  const onsubmit: SubmitHandler<IAddExpenseData> = async (data) => {
+      console.log(data);
+      //add 
+      const res = await addExpenses(data);
+      console.log("see res : ",res);
+  }
+
+
   return (
-    <div>
+  
       <div>
         <form
           className=" flex flex-col justify-center border p-4   gap-3"
-          action=""
+          onSubmit={handleSubmit(onsubmit)} autoComplete="false"
         >
           <div className="form-control flex flex-col">
             <label htmlFor="date">Date</label>
             <input
               className="border rounded-md p-1 mt-1 focus:outline-indigo-100"
-              name="date"
               id="date"
               type="date"
               placeholder="emaple@gmail.com"
+              {...register("date")}
+              required
             />
           </div>
           <div className="form-control flex flex-col ">
@@ -23,10 +44,11 @@ const AddExpenses = () => {
 
             <input
               className="border rounded-md p-1 mt-1  focus:outline-indigo-100"
-              name="item"
+              {...register("item")}
               id="item"
               type="text"
               placeholder="iphone 16 pro"
+              required
             />
           </div>
           <div className="form-control flex flex-col ">
@@ -36,10 +58,11 @@ const AddExpenses = () => {
 
             <input
               className="border rounded-md p-1 mt-1  focus:outline-indigo-100"
-              name="cost"
+              {...register("amount")}
               id="cost"
               type="number"
               placeholder="79000"
+              required
             />
           </div>
           <div className="form-control flex flex-col ">
@@ -49,18 +72,20 @@ const AddExpenses = () => {
 
             <select
               className="border rounded-md p-1 mt-1  focus:outline-indigo-100"
-              name="category"
+              { ...register("category")}
+defaultValue={"Other"}
               id="category"
+              required
             >
-              <option selected>Other</option>
+              <option>Other</option>
             </select>
           </div>
-          <button className="w-full  bg-indigo-500 px-4 py-2 rounded-md mt-2 text-white">
+          <button type="submit" className="w-full  bg-indigo-500 px-4 py-2 rounded-md mt-2 text-white">
             Add
           </button>
         </form>
       </div>
-    </div>
+   
   );
 };
 

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/User/Login";
 import Dashbord from "./pages/User/Dashbord";
 import AddExpenses from "./pages/User/AddExpenses";
-import ManageExpenses from "./pages/User/MamageExpenses";
+import ManageExpenses from "./pages/User/ManageExpenses";
 import Profile from "./pages/User/Profile";
 import UserLayout from "./Layout/UserLayout";
 

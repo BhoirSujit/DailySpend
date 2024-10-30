@@ -7,6 +7,7 @@ import { JwtPayload } from "jsonwebtoken";
 interface ExpensesBody {
   item: string;
   amount: number;
+  date: string,
   category: string;
 }
 
@@ -60,7 +61,7 @@ export const addExpenses: RequestHandler<any, any, ExpensesBody, any> = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { item, amount, category } = req.body;
+  const { item, amount, category, date } = req.body;
   //@ts-ignore
   const userId = req.user.userId;
 
@@ -74,6 +75,7 @@ export const addExpenses: RequestHandler<any, any, ExpensesBody, any> = async (
       userId: userId,
       item: item,
       amount: amount,
+      date: date,
       category: category,
     });
 
@@ -95,7 +97,7 @@ export const updateExpenses: RequestHandler<
   ExpensesBody,
   unknown
 > = async (req, res, next) => {
-  const { item, amount, category } = req.body;
+  const { item, amount, category, date } = req.body;
 
   try {
     if (!item) throw createHttpError(400, "body must contain item");
@@ -107,6 +109,7 @@ export const updateExpenses: RequestHandler<
       {
         item: item,
         amount: amount,
+        date: date,
         category: category,
       },
       { new: true, runValidators: true }

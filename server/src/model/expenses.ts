@@ -6,9 +6,14 @@ const expensesShema = new Schema(
       type: String,
       required: true,
     },
+    date: {
+      type: String,
+      required: true
+    },
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
+      unique: true,
     },
     amount: {
       type: Number,

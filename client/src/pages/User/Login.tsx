@@ -20,8 +20,11 @@ const Login = () => {
 
     try {
       const res = await login(data);
-      setToken(res.token)
-      navigate("/dashbord")
+      if (res && res.token) {
+        setToken(res.token)
+        navigate("/dashbord")
+      }
+      
     } catch (error) {
       alert(error);
     }
