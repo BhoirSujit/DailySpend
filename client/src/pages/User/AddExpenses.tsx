@@ -29,10 +29,9 @@ const AddExpenses = () => {
           <div className="form-control flex flex-col">
             <label htmlFor="date">Date</label>
             <input
-              className="border rounded-md p-1 mt-1 focus:outline-indigo-100"
+              className="border rounded-md p-1 mt-1 focus:outline-indigo-100 bg-transparent"
               id="date"
               type="date"
-              placeholder="emaple@gmail.com"
               {...register("date")}
               required
             />
@@ -43,7 +42,7 @@ const AddExpenses = () => {
             </div>
 
             <input
-              className="border rounded-md p-1 mt-1  focus:outline-indigo-100"
+              className="border rounded-md p-1 mt-1  focus:outline-indigo-100 bg-transparent"
               {...register("item")}
               id="item"
               type="text"
@@ -57,7 +56,7 @@ const AddExpenses = () => {
             </div>
 
             <input
-              className="border rounded-md p-1 mt-1  focus:outline-indigo-100"
+              className="border rounded-md p-1 mt-1  focus:outline-indigo-100 bg-transparent"
               {...register("amount")}
               id="cost"
               type="number"
@@ -71,12 +70,14 @@ const AddExpenses = () => {
             </div>
 
             <select
-              className="border rounded-md p-1 mt-1  focus:outline-indigo-100"
+              className="border rounded-md p-1 mt-1  focus:outline-indigo-100 bg-transparent"
               { ...register("category")}
 defaultValue={"Other"}
               id="category"
               required
             >
+              <option>Food</option>
+              <option>Travel</option>
               <option>Other</option>
             </select>
           </div>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import AuthContext from "../context/auth";
 import axios from "axios";
+import LoadingPage from "../pages/LoadingPage";
 
 const AuthProvider = ({ children }) => {
   const [token, setToken_] = useState(localStorage.getItem("token"));
@@ -19,11 +20,10 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // Set authorization header and manage token in localStorage on initial load
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     }
-    setIsLoading(false); // Set isLoading to false after initial setup
+    setIsLoading(false);
   }, [token]);
 
   const contextValue = useMemo(
@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={contextValue}>
-      {isLoading ? <div>Loading...</div> : children}
+      {isLoading ? <LoadingPage/> : children}
     </AuthContext.Provider>
   );
 };

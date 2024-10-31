@@ -11,31 +11,34 @@ import UserLayout from "./Layout/UserLayout";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./provider/auth";
+import ThemeProvider from "./provider/theme";
 
 const App = () => {
   return (
     <div>
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Home />} path="/" index />
-            <Route element={<Login />} path="/login" />
-            <Route element={<Register />} path="/register" />
+      <ThemeProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Home />} path="/" index />
+              <Route element={<Login />} path="/login" />
+              <Route element={<Register />} path="/register" />
 
-            <Route element={<ProtectedRoute />}>
-              <Route element={<UserLayout />}>
-                <Route element={<Dashbord />} path="/dashbord" />
-                <Route element={<AddExpenses />} path="/add-expenses" />
-                <Route element={<ManageExpenses />} path="/manage-expenses" />
-                <Route element={<Profile />} path="/profile" />
+              <Route element={<ProtectedRoute />}>
+                <Route element={<UserLayout />}>
+                  <Route element={<Dashbord />} path="/dashbord" />
+                  <Route element={<AddExpenses />} path="/add-expenses" />
+                  <Route element={<ManageExpenses />} path="/manage-expenses" />
+                  <Route element={<Profile />} path="/profile" />
+                </Route>
               </Route>
-            </Route>
 
-            {/* Not found */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+              {/* Not found */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </ThemeProvider>
     </div>
   );
 };

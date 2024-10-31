@@ -13,7 +13,7 @@ const UserLayout = () => {
   
 
   return (
-    <div>
+    <div className='bg-white dark:bg-black dark:text-white'>
       <Header/>
       <div className="grid grid-cols-1-fr">
       <Sidebar/>

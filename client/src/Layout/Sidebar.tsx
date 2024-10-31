@@ -30,7 +30,7 @@ const Sidebar = ({activeNav}) => {
       <ul className="flex flex-col  gap-2">
         <li>
           <Link
-            className="flex gap-2 hover:bg-slate-100 p-2 rounded-md"
+            className="flex gap-2 hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
             to={"/dashbord"}
           >
             <ChartPieIcon  className=" size-6" />
@@ -40,7 +40,7 @@ const Sidebar = ({activeNav}) => {
         <li>
           <button
             onClick={handleExpenseExpand}
-            className="flex gap-2 hover:bg-slate-100 p-2 rounded-md"
+            className="flex gap-2 hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
     
           >
             <BanknotesIcon className="size-6" />
@@ -50,7 +50,7 @@ const Sidebar = ({activeNav}) => {
           <ul ref={expenseExpand} className="flex flex-col w-full hidden">
             <li>
               <Link
-                className="pl-10  block  hover:bg-slate-100 p-2 rounded-md"
+                className="pl-10  block  hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
                 to={"/add-expenses"}
               >
                 <span>Add</span>
@@ -58,7 +58,7 @@ const Sidebar = ({activeNav}) => {
             </li>
             <li>
               <Link
-                className="pl-10  block hover:bg-slate-100 p-2 rounded-md"
+                className="pl-10  block hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
                 to={"/manage-expenses"}
               >
                 Manage
@@ -69,7 +69,7 @@ const Sidebar = ({activeNav}) => {
         <li>
           <button
             onClick={handleReportExpand}
-            className="flex  gap-2 hover:bg-slate-100 p-2 rounded-md"
+            className="flex  gap-2 hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
           >
             <ClipboardDocumentListIcon className="size-6" />
             <div className="flex-grow">Reports</div>
@@ -79,7 +79,7 @@ const Sidebar = ({activeNav}) => {
           <ul ref={reportExpand} className="flex flex-col w-full hidden">
             <li>
               <Link
-                className="pl-10  block  hover:bg-slate-100 p-2 rounded-md"
+                className="pl-10  block  hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
                 to={"/add-expenses"}
               >
                 <span>Date wise</span>
@@ -87,7 +87,7 @@ const Sidebar = ({activeNav}) => {
             </li>
             <li>
               <Link
-                className="pl-10  block hover:bg-slate-100 p-2 rounded-md"
+                className="pl-10  block hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
                 to={"/manage-expenses"}
               >
                 Months wise
@@ -95,7 +95,7 @@ const Sidebar = ({activeNav}) => {
             </li>
             <li>
               <Link
-                className="pl-10  block hover:bg-slate-100 p-2 rounded-md"
+                className="pl-10  block hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
                 to={"/manage-expenses"}
               >
                 Year wise
@@ -103,7 +103,7 @@ const Sidebar = ({activeNav}) => {
             </li>
             <li>
               <Link
-                className="pl-10  block hover:bg-slate-100 p-2 rounded-md"
+                className="pl-10  block hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
                 to={"/manage-expenses"}
               >
                 Category wise
@@ -116,7 +116,7 @@ const Sidebar = ({activeNav}) => {
       <ul className="flex flex-col gap-4">
         <li>
           <Link
-            className="flex gap-2 hover:bg-slate-100 p-2 rounded-md"
+            className="flex gap-2 hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
             to={"/profile"}
           >
             <AdjustmentsVerticalIcon className=" size-6" />
@@ -125,7 +125,7 @@ const Sidebar = ({activeNav}) => {
         </li>
         <li>
           <button
-            className="flex gap-2 hover:bg-slate-100 p-2 rounded-md"
+            className="flex gap-2 hover:bg-slate-100 dark:hover:bg-gray-800 p-2 rounded-md"
            onClick={logout}
           >
             <ArrowRightStartOnRectangleIcon className="size-6" />
